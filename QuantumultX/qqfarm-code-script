@@ -11,11 +11,11 @@
 
 ************************************************
 [rewrite_local]
-^https?:\/\/gate-obt\.nqf\.qq\.com\/prod\/ws\?.*code=.* url ^script-response-body https://raw.githubusercontent.com/rpvvn/vv-qx-script/main/qqfarm-code-script.js
+^https?:\/\/gate-obt\.nqf\.qq\.com\/prod\/ws\?.*code=.* url ^script-response-body https://cdn.jsdelivr.net/gh/rpvvn/vv-qx-script@main/QuantumultX/qqfarm-code-script.js
 
 [mitm]
-hostname = gate-obt.nqf.qq.com
-
+# 覆盖目标域名+脚本域名，解决子资源拦截
+hostname = gate-obt.nqf.qq.com, raw.githubusercontent.com
 
 *******************************/
 
