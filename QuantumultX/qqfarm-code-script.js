@@ -2,7 +2,7 @@
  *
  * 脚本功能：QQ农场code提取
  * 软件版本：Quantumult X 最新版
- * 下载地址：https://raw.githubusercontent.com/rpvvn/vv-qx-script/main/extract-code-block.js
+ * 下载地址：https://github.com/rpvvn/vv-qx-script/edit/main/QuantumultX/qqfarm-code-script.js
  * 脚本作者：vullfin    
  * 更新时间：2026年
  * 电报频道：https://t.me/vullfin
@@ -11,11 +11,9 @@
 
 ************************************************
 [rewrite_local]
-# 核心：正则语法完全正确，精准匹配目标URL，加^强制拦截避免解析优先级问题
-^https?:\/\/gate-obt\.nqf\.qq\.com\/prod\/ws\?.*code=.* url ^script-response-body https://raw.githubusercontent.com/rpvvn/vv-qx-script/main/QuantumultX/qqfarm-code-script.js
+^https?://gate-obt\.nqf\.qq\.com/prod/ws\?.*code=.* url script-response-body https://raw.githubusercontent.com/rpvvn/vv-qx-script/main/QuantumultX/qqfarm-code-script.js
 
 [mitm]
-# 覆盖所有需要MitM的域名，解决子资源/证书问题
 hostname = gate-obt.nqf.qq.com
 
 *******************************/
