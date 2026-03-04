@@ -11,40 +11,33 @@
 
 ************************************************
 [rewrite_local]
-^https?://gate-obt\.nqf\.qq\.com/prod/ws\?.*code=.* url script-response-body https://raw.githubusercontent.com/rpvvn/vv-qx-script/main/QuantumultX/qqfarm-code-script.js
+^https?://gate-obt\.nqf\.qq\.com/prod/ws\?.*code=.* url script-request-header https://raw.githubusercontent.com/rpvvn/vv-qx-script/main/QuantumultX/qqfarm-code-script.js
 
 [mitm]
 hostname = gate-obt.nqf.qq.com
 
 *******************************/
 
-(function() {
-    'use strict';
-    const requestUrl = $request.url || '';
-    if (!requestUrl) {
-        console.log('未获取到请求URL');
-        $done({ response: { status: 403, body: 'Blocked' } });
-        return;
+
+// 核心：QX正确的剪贴板API是 $clipboard，不是 $persistentStore
+const url = $request.url;
+
+if (url.includes("code=")) {
+    // 提取code（正则精准匹配code=后到&前的内容）
+    const codeMatch = url.match(/code=([^&]+)/);
+    const code = codeMatch ? codeMatch[1] : null;
+
+    if (code) {
+        console.log("🎯 成功获取 QQ农场Code: " + code);
+        
+        // ✅ 正确复制到剪贴板（QX专属API）
+        $clipboard.copy(code);
+        // 持久化存储（可选，方便后续查看）
+        $persistentStore.write(code, "qq_farm_code");
+        // 通知提示
+        $notification.post("QQ农场 Code提取成功", "", "Code已复制到剪贴板：\n" + code);
     }
+}
 
-    const codeMatch = requestUrl.match(/code=([^&]+)/);
-    const codeValue = codeMatch ? codeMatch[1] : null;
-
-    if (codeValue) {
-        $clipboard(codeValue);
-        $notification('QQ农场Code提取成功', '已复制到剪贴板', codeValue);
-        console.log(`提取并复制code：${codeValue}`);
-    } else {
-        console.log('URL中未找到code参数');
-        $notification('提取失败', 'URL中无code参数', '');
-    }
-
-    $done({
-        response: {
-            status: 403,
-            statusText: 'Forbidden',
-            body: 'Request blocked by Quantumult X',
-            headers: { 'Content-Type': 'text/plain' }
-        }
-    });
-})();
+// ✅ 放行请求，确保游戏正常登录（不阻断）
+$done({ request: $request });
