@@ -1,0 +1,36 @@
+// 提取code并复制 → 阻断请求 → 避免code失效
+(function() {
+    'use strict';
+    
+    // 1. 获取请求URL并提取code
+    const requestUrl = $request.url || '';
+    if (!requestUrl) {
+        console.log('未获取到请求URL');
+        $done({ response: { status: 403, body: 'Blocked' } });
+        return;
+    }
+
+    // 2. 正则提取code参数
+    const codeMatch = requestUrl.match(/code=([^&]+)/);
+    const codeValue = codeMatch ? codeMatch[1] : null;
+
+    // 3. 复制code并发送通知
+    if (codeValue) {
+        $clipboard(codeValue);
+        $notification('QQ农场Code提取成功', '已复制到剪贴板', codeValue);
+        console.log(`提取并复制code：${codeValue}`);
+    } else {
+        console.log('URL中未找到code参数');
+        $notification('提取失败', 'URL中无code参数', '');
+    }
+
+    // 4. 阻断请求发送到服务器
+    $done({
+        response: {
+            status: 403,
+            statusText: 'Forbidden',
+            body: 'Request blocked by Quantumult X (code extracted)',
+            headers: { 'Content-Type': 'text/plain' }
+        }
+    });
+})();
