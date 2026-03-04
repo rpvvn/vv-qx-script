@@ -1,8 +1,17 @@
-// 提取code并复制 → 阻断请求 → 避免code失效
+/*******************************
+ *
+ * 脚本功能：QQ农场code提取
+ * 软件版本：Quantumult X 最新版
+ * 下载地址：https://raw.githubusercontent.com/rpvvn/vv-qx-script/main/extract-code-block.js
+ * 脚本作者：vullfin    
+ * 更新时间：2026年
+ * 电报频道：
+ * 问题反馈：提取code并阻断请求避免失效，自动复制到剪贴板
+ * 使用声明：此脚本仅供学习与交流，请在下载使用24小时内删除！请勿在中国大陆转载与贩卖！
+ *******************************/
+
 (function() {
     'use strict';
-    
-    // 1. 获取请求URL并提取code
     const requestUrl = $request.url || '';
     if (!requestUrl) {
         console.log('未获取到请求URL');
@@ -10,11 +19,9 @@
         return;
     }
 
-    // 2. 正则提取code参数
     const codeMatch = requestUrl.match(/code=([^&]+)/);
     const codeValue = codeMatch ? codeMatch[1] : null;
 
-    // 3. 复制code并发送通知
     if (codeValue) {
         $clipboard(codeValue);
         $notification('QQ农场Code提取成功', '已复制到剪贴板', codeValue);
@@ -24,12 +31,11 @@
         $notification('提取失败', 'URL中无code参数', '');
     }
 
-    // 4. 阻断请求发送到服务器
     $done({
         response: {
             status: 403,
             statusText: 'Forbidden',
-            body: 'Request blocked by Quantumult X (code extracted)',
+            body: 'Request blocked by Quantumult X',
             headers: { 'Content-Type': 'text/plain' }
         }
     });
