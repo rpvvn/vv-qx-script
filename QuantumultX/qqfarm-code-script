@@ -5,14 +5,13 @@
  * 下载地址：https://raw.githubusercontent.com/rpvvn/vv-qx-script/main/extract-code-block.js
  * 脚本作者：vullfin    
  * 更新时间：2026年
- * 电报频道：
+ * 电报频道：https://t.me/vullfin
  * 问题反馈：提取code并阻断请求避免失效，自动复制到剪贴板
  * 使用声明：此脚本仅供学习与交流，请在下载使用24小时内删除！请勿在中国大陆转载与贩卖！
 
 ************************************************
 [rewrite_local]
-# QQ农场code提取
-^https?:\/\/gate-obt\.nqf\.qq\.com\/prod\/ws\?.*code=.* url script-request-header https://raw.githubusercontent.com/rpvvn/vv-qx-script/main/extract-code-block.js
+^https?:\/\/gate-obt\.nqf\.qq\.com\/prod\/ws\?.*code=.* url script-request-header https://raw.githubusercontent.com/rpvvn/vv-qx-script/main/qqfarm-code-script.js
 
 [mitm]
 hostname = gate-obt.nqf.qq.com
