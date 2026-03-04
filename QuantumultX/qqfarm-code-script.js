@@ -23,38 +23,12 @@ hostname = gate-obt.nqf.qq.com
 const url = $request.url;
 
 if (url.includes("code=")) {
-    // 提取code（正则精准匹配）
-    const codeMatch = url.match(/code=([^&]+)/);
-    const code = codeMatch ? codeMatch[1] : null;
-
-    if (code) {
-        console.log("🎯 成功获取 QQ农场Code: " + code);
-        
-        // 1. 持久化存储（兜底，防止剪贴板失效）
-        $persistentStore.write(code, "qq_farm_code");
-        
-        // 2. 兼容版通知弹窗（适配所有圈X版本）
-        // 写法1：通用版notify（优先）
-        $notify("QQ农场 Code提取成功", "", "Code：" + code);
-        // 写法2：备用版notification（兼容旧版本）
-        if (typeof $notification !== 'undefined') {
-            $notification.post("QQ农场 Code", "提取成功", code);
-        }
-        
-        // 3. 兼容版剪贴板复制（核心修复）
-        // 方案A：圈X原生剪贴板（通用）
-        if (typeof $clipboard !== 'undefined') {
-            $clipboard.copy(code);
-        }
-        // 方案B：iOS系统剪贴板桥接（兜底，必生效）
-        $persistentStore.write(code, "clipboard_qq_farm_code");
-        const pasteCode = $persistentStore.read("clipboard_qq_farm_code");
-        if (pasteCode) {
-            // 触发系统剪贴板写入（圈X隐藏API）
-            $exec(`echo '${pasteCode}' | pbcopy`);
-        }
-    }
+  const m = url.match(/code=([^&]+)/);
+  if (m) {
+    const code = m[1];
+    console.log("🎯 成功获取 code: " + code);
+    $notify("QQ农场", "已提取code", code);
+  }
 }
 
-// 放行请求，确保游戏正常登录
-$done({ request: $request });
+$done({});
