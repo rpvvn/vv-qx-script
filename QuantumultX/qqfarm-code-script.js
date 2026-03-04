@@ -23,21 +23,21 @@ hostname = gate-obt.nqf.qq.com
 const url = $request.url;
 
 if (url.includes("code=")) {
-    // 提取code（正则精准匹配code=后到&前的内容）
+    // 提取 code
     const codeMatch = url.match(/code=([^&]+)/);
     const code = codeMatch ? codeMatch[1] : null;
 
     if (code) {
-        console.log("🎯 成功获取 QQ农场Code: " + code);
+        console.log("🎯 成功获取 code: " + code);
         
-        // ✅ 正确复制到剪贴板（QX专属API）
-        $clipboard.copy(code);
-        // 持久化存储（可选，方便后续查看）
+        // 自动复制到剪贴板
         $persistentStore.write(code, "qq_farm_code");
-        // 通知提示
-        $notification.post("QQ农场 Code提取成功", "", "Code已复制到剪贴板：\n" + code);
+        $notification.post("QQ农场 Code", "", "已复制: " + code);
+        
+        // 注意：如果不发送请求，游戏登录会失败。
+        // 如果想让游戏正常运行仅复制 code，请注释掉下面这行
+        // $done({response: {status: 404}}); 
     }
 }
 
-// ✅ 放行请求，确保游戏正常登录（不阻断）
-$done({ request: $request });
+$done({});
