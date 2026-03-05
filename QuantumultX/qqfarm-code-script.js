@@ -19,16 +19,6 @@ hostname = gate-obt.nqf.qq.com
 *******************************/
 
 
-
-const url = $request.url;
-
-if (url.includes("code=")) {
-  const m = url.match(/code=([^&]+)/);
-  if (m) {
-    const code = m[1];
-    console.log("🎯 成功获取 code: " + code);
-    $notify("QQ农场", "已提取code", code);
-  }
-}
+if ($request.url.match(/code=([^&]+)/)) $notify("QQ农场", "已提取code", $request.url.match(/code=([^&]+)/)[1]);
 
 $done({});
