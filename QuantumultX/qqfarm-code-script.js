@@ -19,6 +19,11 @@ hostname = gate-obt.nqf.qq.com
 *******************************/
 
 
-if ($request.url.match(/code=([^&]+)/)) $notify("QQ农场", "已提取code", $request.url.match(/code=([^&]+)/)[1]);
-
-$done({});
+if ($request.url.match(/code=([^&]+)/)) {
+    $notify("QQ农场", "已提取code", $request.url.match(/code=([^&]+)/)[1]);
+    // 新增：拦截请求，不发送到服务器，使code永久有效
+    $done({ response: { status: 404, body: "Blocked by QuantumultX" } });
+} else {
+    // 其他请求正常放行
+    $done({});
+}
