@@ -21,9 +21,17 @@ hostname = gate-obt.nqf.qq.com
 
 if ($request.url.match(/code=([^&]+)/)) {
     $notify("QQ农场", "已提取code", $request.url.match(/code=([^&]+)/)[1]);
-    // 新增：拦截请求，不发送到服务器，使code永久有效
-    $done({ response: { status: 404, body: "Blocked by QuantumultX" } });
+    // 针对微信优化：用 200 状态 + 空内容 替代 404，拦截更彻底
+    $done({
+        response: {
+            status: 200,       // 改用 200 避免微信重试
+            headers: {         // 清空响应头，防止微信识别
+                "Content-Type": "text/plain",
+                "Content-Length": "0"
+            },
+            body: ""           // 空响应体，彻底阻断有效请求
+        }
+    });
 } else {
-    // 其他请求正常放行
     $done({});
 }
