@@ -18,8 +18,8 @@ All scripts are developed for personal learning and use, and are continuously up
 ### 📋 Script List
 | Script Name | Function Description | Adapted Tools |
 |-------------|----------------------|---------------|
-| ✔ QQ-farm-code | Automatically intercept and extract the code parameter from QQ Farm request URL, copy it to clipboard, and block the request to avoid code invalidation | Quantumult X (Circle X) |
-| ✔ QQ-farm-AutoUpdateCode | Automatically obtain QQ_Farm credentials and submit them to the server for updates | ProxyPin |
+| ✔ QQ-farm-code | Automatically intercept and extract the code parameter from QQ Farm request URL, copy it to clipboard, and block the request to avoid code invalidation |  [Quantumult X](https://github.com/crossutility/Quantumult-X) |
+| ✔ QQ-farm-AutoUpdateCode | Automatically obtain QQ_Farm credentials and submit them to the server for updates |  [ProxyPin](https://github.com/wanghongenpin/proxypin) |
 | ✔ Extensible Script 2 | (Supplement according to actual scripts) | (e.g.: Quantumult X/Tampermonkey/Shortcuts) |
 
 
