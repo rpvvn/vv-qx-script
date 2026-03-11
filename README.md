@@ -18,8 +18,8 @@
 ### 📋 脚本清单
 | 脚本名称 | 功能说明 | 适配工具 |
 |----------|----------|----------|
-| ✔ QQ-farm-code | 自动截取QQ农场请求URL中的code参数并复制到剪贴板，同时阻断请求避免code失效 | Quantumult X（圈X） |
-| ✔ QQ-farm-AutoUpdateCode | 自动抓取CODE并提交到服务器 | ProxyPin |
+| ✔ QQ-farm-code | 自动截取QQ农场请求URL中的code参数并复制到剪贴板，同时阻断请求避免code失效 | [Quantumult X（圈X）](https://github.com/crossutility/Quantumult-X) |
+| ✔ QQ-farm-AutoUpdateCode | 自动抓取CODE并提交到服务器 | [ProxyPin](https://github.com/wanghongenpin/proxypin) |
 | ✔ 可扩展脚本2 | （可根据实际脚本补充） | （如：圈X/油猴/快捷指令） |
 
 
