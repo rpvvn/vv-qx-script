@@ -1,10 +1,18 @@
+<div align="center">
+
+
+
+
+
 # 📜 个人脚本仓库
 
 [![GitHub Stars](https://img.shields.io/github/stars/rpvvn/vv-qx-script?style=social)](https://github.com/rpvvn/vv-qx-script/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/rpvvn/vv-qx-script?style=social)](https://github.com/rpvvn/vv-qx-script/network/members)
 [![GitHub Watchers](https://img.shields.io/github/watchers/rpvvn/vv-qx-script?style=social)](https://github.com/rpvvn/vv-qx-script/watchers)
 
-> 🔄 语言切换：[English](README_EN.md) | 中文（当前）
+#### 🔄 语言切换：[English](README_EN.md) | 中文（当前）
+
+</div>
 
 ## 📖 仓库介绍
 本仓库用于存放个人日常使用开发的各类小脚本，包括但不限于：
